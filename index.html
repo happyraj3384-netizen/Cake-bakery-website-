@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Makes the website look good on mobile phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monginis – Premium Cake Bakery</title>
+
+  <!-- Link to our CSS file for all the styling -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Google Fonts: Cormorant for headings, Jost for body text -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <!-- Sticky top navigation bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+
+      <!-- Logo on the left -->
+      <a href="#" class="logo">Monginis<span class="logo-dot">.</span></a>
+
+      <!-- Navigation links (hidden on mobile, shown via hamburger) -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- Order button on the right (desktop) -->
+      <a href="#contact" class="nav-cta">Order Now</a>
+
+      <!-- Hamburger icon for mobile -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </nav>
+  <!-- ==================== END NAVBAR ==================== -->
+
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <!-- Full-screen welcome area with headline and CTA button -->
+  <section class="hero" id="hero">
+
+    <!-- Decorative floating circles in the background -->
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+    <div class="hero-blob blob-3"></div>
+
+    <div class="hero-content">
+      <!-- Small label above headline -->
+      <span class="hero-label">✦ Handcrafted Since 1956</span>
+
+      <!-- Main headline -->
+      <h1 class="hero-title">
+        Every Slice<br />
+        Tells a <em>Sweet</em><br />
+        Story
+      </h1>
+
+      <!-- Short description -->
+      <p class="hero-sub">
+        Premium cakes, pastries & confections baked fresh daily.<br />
+        Celebrate your moments with Monginis.
+      </p>
+
+      <!-- Two CTA buttons -->
+      <div class="hero-btns">
+        <a href="#menu" class="btn btn-primary">Explore Menu</a>
+        <a href="#contact" class="btn btn-outline">Order Custom Cake</a>
+      </div>
+
+      <!-- Small trust badges row -->
+      <div class="hero-badges">
+        <div class="badge">🍰 200+ Flavours</div>
+        <div class="badge">🚀 Same-Day Delivery</div>
+        <div class="badge">⭐ 4.9 / 5 Rating</div>
+      </div>
+    </div>
+
+    <!-- Hero right side: decorative cake card -->
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-cake-emoji">🎂</div>
+        <div class="hero-card-text">
+          <strong>Chocolate Truffle</strong>
+          <span>Best Seller · ₹449/kg</span>
+        </div>
+        <div class="hero-card-badge">🔥 Hot</div>
+      </div>
+      <div class="hero-card hero-card-2">
+        <div class="hero-cake-emoji">🍓</div>
+        <div class="hero-card-text">
+          <strong>Strawberry Dream</strong>
+          <span>New Arrival · ₹529/kg</span>
+        </div>
+        <div class="hero-card-badge">✨ New</div>
+      </div>
+    </div>
+
+  </section>
+  <!-- ==================== END HERO ==================== -->
+
+
+  <!-- ==================== STATS BAR ==================== -->
+  <!-- Quick numbers to build trust -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-num">68+</span>
+      <span class="stat-label">Years of Baking</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">500+</span>
+      <span class="stat-label">Outlets in India</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">200+</span>
+      <span class="stat-label">Cake Varieties</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">10M+</span>
+      <span class="stat-label">Happy Customers</span>
+    </div>
+  </div>
+  <!-- ==================== END STATS BAR ==================== -->
+
+
+  <!-- ==================== MENU SECTION ==================== -->
+  <section class="section menu-section" id="menu">
+
+    <div class="section-header">
+      <span class="section-tag">Our Menu</span>
+      <h2 class="section-title">Freshly Baked,<br />Every Single Day</h2>
+      <p class="section-sub">Each cake is crafted with the finest ingredients and baked fresh every morning.</p>
+    </div>
+
+    <!-- Filter tabs to switch between categories -->
+    <div class="menu-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="signature">Signature</button>
+      <button class="filter-btn" data-filter="seasonal">Seasonal</button>
+      <button class="filter-btn" data-filter="custom">Custom</button>
+    </div>
+
+    <!-- Menu grid: 3 cards per row on desktop, 1 on mobile -->
+    <div class="menu-grid" id="menuGrid">
+
+      <!-- Card 1 -->
+      <div class="cake-card" data-category="signature">
+        <div class="card-img-wrap">
+          <div class="cake-emoji-img choco">🍫</div>
+          <div class="card-tag">Best Seller</div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Chocolate Truffle</h3>
+          <p class="card-desc">Rich dark chocolate layers with velvety ganache & cocoa dusting</p>
+          <div class="card-footer">
+            <span class="card-price">₹449 / kg</span>
+            <button class="card-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="cake-card" data-category="signature">
+        <div class="card-img-wrap">
+          <div class="cake-emoji-img butter">🧈</div>
+          <div class="card-tag popular">Popular</div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Butterscotch Delight</h3>
+          <p class="card-desc">Classic butterscotch cream with golden praline and caramel swirls</p>
+          <div class="card-footer">
+            <span class="card-price">₹399 / kg</span>
+            <button class="card-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="cake-card" data-category="signature">
+        <div class="card-img-wrap">
+          <div class="cake-emoji-img velvet">❤️</div>
+          <div class="card-tag new">New</div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Red Velvet Dream</h3>
+          <p class="card-desc">Soft velvet sponge layered with luscious cream cheese frosting</p>
+          <div class="card-footer">
+            <span class="card-price">₹499 / kg</span>
+            <button class="card-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="cake-card" data-category="seasonal">
+        <div class="card-img-wrap">
+          <div class="cake-emoji-img mango">🥭</div>
+          <div class="card-tag seasonal-tag">Seasonal</div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Alphonso Mango</h3>
+          <p class="card-desc">Fresh Alphonso mango mousse on a light sponge base — summer special</p>
+          <div class="card-footer">
+            <span class="card-price">₹549 / kg</span>
+            <button class="card-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="cake-card" data-category="seasonal">
+        <div class="card-img-wrap">
+          <div class="cake-emoji-img strawberry">🍓</div>
+          <div class="card-tag new">New</div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Strawberry Bliss</h3>
+          <p class="card-desc">Fresh strawberry compote with vanilla cream on a soft chiffon base</p>
+          <div class="card-footer">
+            <span class="card-price">₹529 / kg</span>
+            <button class="card-btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="cake-card" data-category="custom">
+        <div class="card-img-wrap">
+          <div class="cake-emoji-img custom">🎨</div>
+          <div class="card-tag custom-tag">Custom</div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Your Dream Cake</h3>
+          <p class="card-desc">Fully personalised design, flavour & size for any occasion</p>
+          <div class="card-footer">
+            <span class="card-price">Starting ₹799</span>
+            <button class="card-btn">Design Yours</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end menu-grid -->
+
+  </section>
+  <!-- ==================== END MENU ==================== -->
+
+
+  <!-- ==================== ABOUT SECTION ==================== -->
+  <section class="section about-section" id="about">
+    <div class="about-grid">
+
+      <!-- Left: decorative visual block -->
+      <div class="about-visual">
+        <div class="about-img-main">
+          <span class="about-big-emoji">👩‍🍳</span>
+          <p class="about-img-caption">Our master bakers</p>
+        </div>
+        <div class="about-stat-card">
+          <span class="asc-num">68</span>
+          <span class="asc-label">Years of<br />Expertise</span>
+        </div>
+      </div>
+
+      <!-- Right: text content -->
+      <div class="about-content">
+        <span class="section-tag">Our Story</span>
+        <h2 class="section-title">Baked with Heart,<br />Served with Joy</h2>
+        <p class="about-text">
+          Since 1956, Monginis has been synonymous with celebration. What started as a single bakery
+          in Mumbai has grown into India's most loved cake chain — but our core belief remains unchanged:
+          every cake should feel like it was made just for you.
+        </p>
+        <p class="about-text">
+          Our bakers use only the freshest ingredients — no shortcuts, no artificial flavours. Every
+          morning, the ovens come alive before sunrise so your cakes are always at their very best.
+        </p>
+
+        <!-- Feature list -->
+        <ul class="about-features">
+          <li>🌿 Fresh, natural ingredients sourced daily</li>
+          <li>🎓 Trained master bakers with 10+ years of experience</li>
+          <li>🚀 Same-day delivery across 500+ cities</li>
+          <li>🎨 Fully customised cakes for every occasion</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+      </div>
+
+    </div>
+  </section>
+  <!-- ==================== END ABOUT ==================== -->
+
+
+  <!-- ==================== REVIEWS SECTION ==================== -->
+  <section class="section reviews-section" id="reviews">
+
+    <div class="section-header">
+      <span class="section-tag">Customer Love</span>
+      <h2 class="section-title">What Our Customers Say</h2>
+      <p class="section-sub">Real reviews from real celebrations</p>
+    </div>
+
+    <!-- Reviews grid: 3 cards -->
+    <div class="reviews-grid">
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">
+          "Ordered a custom wedding cake — it was absolutely stunning. The chocolate truffle flavour
+          was divine. Every guest asked where we got it from!"
+        </p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">P</div>
+          <div class="reviewer-info">
+            <strong>Priya Sharma</strong>
+            <span>Mumbai · Wedding Cake</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card featured">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">
+          "Best butterscotch cake I've ever had. Ordered for my son's birthday and he was over the
+          moon. Delivery was on time and packaging was perfect!"
+        </p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">R</div>
+          <div class="reviewer-info">
+            <strong>Rahul Mehta</strong>
+            <span>Delhi · Birthday Cake</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">
+          "The red velvet was perfect — moist, creamy, not too sweet. We've been ordering from
+          Monginis for 5 years and they never disappoint."
+        </p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">A</div>
+          <div class="reviewer-info">
+            <strong>Anita Kulkarni</strong>
+            <span>Pune · Red Velvet</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end reviews-grid -->
+
+  </section>
+  <!-- ==================== END REVIEWS ==================== -->
+
+
+  <!-- ==================== CONTACT SECTION ==================== -->
+  <section class="section contact-section" id="contact">
+
+    <div class="contact-grid">
+
+      <!-- Left: info -->
+      <div class="contact-info">
+        <span class="section-tag">Get in Touch</span>
+        <h2 class="section-title">Order Your<br />Dream Cake</h2>
+        <p class="contact-sub">
+          Have a special occasion coming up? Fill out the form and our team will call you back within 2 hours.
+        </p>
+        <ul class="contact-details">
+          <li>📞 &nbsp;1800-123-4567 (Toll Free)</li>
+          <li>📧 &nbsp;orders@monginis.in</li>
+          <li>🕐 &nbsp;Mon – Sun · 8am – 10pm</li>
+          <li>📍 &nbsp;500+ outlets across India</li>
+        </ul>
+      </div>
+
+      <!-- Right: contact form -->
+      <div class="contact-form-wrap">
+        <form class="contact-form" id="contactForm">
+
+          <!-- Name field -->
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="e.g. Priya Sharma" required />
+          </div>
+
+          <!-- Phone field -->
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="e.g. 98765 43210" required />
+          </div>
+
+          <!-- Occasion field -->
+          <div class="form-group">
+            <label for="occasion">Occasion</label>
+            <select id="occasion" name="occasion">
+              <option value="">Select occasion...</option>
+              <option>Birthday</option>
+              <option>Wedding</option>
+              <option>Anniversary</option>
+              <option>Corporate Event</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <!-- Message field -->
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell us about your dream cake..."></textarea>
+          </div>
+
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary full-width">Send My Order Request 🎂</button>
+
+          <!-- Success message (hidden by default, shown via JS) -->
+          <div class="form-success" id="formSuccess">
+            ✅ Thank you! We'll call you back within 2 hours.
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+  <!-- ==================== END CONTACT ==================== -->
+
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="footer-inner">
+
+      <!-- Logo and tagline -->
+      <div class="footer-brand">
+        <span class="logo">Monginis<span class="logo-dot">.</span></span>
+        <p>Sweetening India since 1956.<br />Crafted with love, delivered with joy.</p>
+      </div>
+
+      <!-- Quick links -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#menu">Our Menu</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Popular cakes links -->
+      <div class="footer-col">
+        <h4>Popular Cakes</h4>
+        <ul>
+          <li><a href="#">Chocolate Truffle</a></li>
+          <li><a href="#">Butterscotch</a></li>
+          <li><a href="#">Red Velvet</a></li>
+          <li><a href="#">Custom Cakes</a></li>
+        </ul>
+      </div>
+
+      <!-- Social links -->
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <span>© 2024 Monginis Foods Pvt. Ltd. All rights reserved.</span>
+      <span>Made with ❤️ for every celebration</span>
+    </div>
+
+  </footer>
+  <!-- ==================== END FOOTER ==================== -->
+
+
+  <!-- Scroll-to-top button (shows after scrolling down) -->
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+  <!-- Link to our JavaScript file (placed at end of body so HTML loads first) -->
+  <script src="script.js"></script>
+
+</body>
+</html>
