@@ -1,383 +1,304 @@
 /* ============================================================
-   MONGINIS BAKERY — script.js
-   All the interactivity for the website.
+   MONGINIS FUTURISTIC — script.js
+   All interactivity for the cyberpunk bakery website.
 
-   TABLE OF CONTENTS:
-   1. Navbar: scroll shadow + hamburger menu toggle
-   2. Smooth active link highlighting
+   FEATURES:
+   1. Navbar scroll effect + hamburger menu
+   2. Active nav link highlighting
    3. Menu filter tabs
    4. Scroll reveal animations
    5. Scroll-to-top button
-   6. Contact form submission
-   7. "Add to Cart" button feedback
-   8. Init: run everything on page load
+   6. Contact form with validation
+   7. Cart button feedback
+   8. Animated number counters (stats bar)
+   9. Typing effect in terminal (hero)
    ============================================================ */
 
 
 /* ============================================================
-   1. NAVBAR SCROLL SHADOW
-   Adds a shadow to navbar when user scrolls down
+   1. NAVBAR
    ============================================================ */
 function initNavbar() {
-
   const navbar    = document.getElementById('navbar');
   const hamburger = document.getElementById('hamburger');
   const navLinks  = document.getElementById('navLinks');
 
-  /* --- Scroll shadow --- */
   window.addEventListener('scroll', function () {
-
-    // Add "scrolled" class when user goes past 20px
-    if (window.scrollY > 20) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
   });
 
-  /* --- Hamburger menu toggle (mobile) --- */
   hamburger.addEventListener('click', function () {
-
-    // Toggle open/close state
     hamburger.classList.toggle('open');
     navLinks.classList.toggle('open');
-
   });
 
-  /* --- Close menu when a link is clicked --- */
   navLinks.querySelectorAll('a').forEach(function (link) {
     link.addEventListener('click', function () {
       hamburger.classList.remove('open');
       navLinks.classList.remove('open');
     });
   });
-
 }
 
 
 /* ============================================================
-   2. ACTIVE NAV LINK HIGHLIGHT
-   Highlights the nav link for the section currently in view
+   2. ACTIVE NAV LINK HIGHLIGHTING
    ============================================================ */
 function initActiveLinks() {
-
   const sections = document.querySelectorAll('section[id]');
   const navItems = document.querySelectorAll('.nav-links a');
 
   window.addEventListener('scroll', function () {
+    let current = '';
 
-    let currentSection = '';
-
-    // Check which section is currently visible
-    sections.forEach(function (section) {
-      const sectionTop = section.offsetTop - 100;  // 100px offset for navbar height
-      if (window.scrollY >= sectionTop) {
-        currentSection = section.getAttribute('id');
+    sections.forEach(function (sec) {
+      if (window.scrollY >= sec.offsetTop - 120) {
+        current = sec.getAttribute('id');
       }
     });
 
-    // Add "active" style to matching nav link
     navItems.forEach(function (link) {
-      link.style.color = '';  // Reset all to default
-      if (link.getAttribute('href') === '#' + currentSection) {
-        link.style.color = 'var(--pink-mid)';  // Highlight current
+      link.style.color = '';
+      if (link.getAttribute('href') === '#' + current) {
+        link.style.color = 'var(--neon)';
       }
     });
-
   });
-
 }
 
 
 /* ============================================================
    3. MENU FILTER TABS
-   Shows/hides cake cards based on selected category
    ============================================================ */
 function initMenuFilters() {
-
   const filterBtns = document.querySelectorAll('.filter-btn');
   const cakeCards  = document.querySelectorAll('.cake-card');
 
   filterBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
-
-      // --- Update active button state ---
       filterBtns.forEach(function (b) { b.classList.remove('active'); });
       btn.classList.add('active');
 
-      const selectedFilter = btn.getAttribute('data-filter');
+      const filter = btn.getAttribute('data-filter');
 
-      // --- Show or hide cards based on filter ---
       cakeCards.forEach(function (card) {
-        const cardCategory = card.getAttribute('data-category');
-
-        if (selectedFilter === 'all' || cardCategory === selectedFilter) {
-          // Show this card
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
           card.classList.remove('hidden');
-          // Re-trigger entrance animation
           card.style.animation = 'none';
-          card.offsetHeight;  // Force browser to register the reset (reflow trick)
+          card.offsetHeight; // Reflow trick to restart animation
           card.style.animation = '';
         } else {
-          // Hide this card
           card.classList.add('hidden');
         }
       });
-
     });
   });
-
 }
 
 
 /* ============================================================
    4. SCROLL REVEAL ANIMATIONS
-   Elements fade in as they enter the viewport
    ============================================================ */
 function initScrollReveal() {
-
-  // Add "reveal" class to elements we want to animate
-  const elementsToReveal = document.querySelectorAll(
-    '.section-header, .cake-card, .review-card, .about-content, .about-visual, .contact-info, .contact-form-wrap, .stat-item'
+  const elements = document.querySelectorAll(
+    '.section-header, .review-card, .about-content, .about-visual, .contact-info, .contact-form-wrap'
   );
 
-  elementsToReveal.forEach(function (el) {
-    el.classList.add('reveal');
-  });
+  elements.forEach(function (el) { el.classList.add('reveal'); });
 
-  // Create an IntersectionObserver — it watches when elements enter the screen
   const observer = new IntersectionObserver(
-
     function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          // Element is visible — add "visible" class to animate it in
           entry.target.classList.add('visible');
-          // Stop watching this element (we only want the animation once)
           observer.unobserve(entry.target);
         }
       });
     },
-
-    {
-      threshold: 0.12,       // Trigger when 12% of element is visible
-      rootMargin: '0px 0px -50px 0px'  // Trigger slightly before element reaches bottom of screen
-    }
-
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
   );
 
-  // Attach the observer to each element
-  elementsToReveal.forEach(function (el) {
+  document.querySelectorAll('.reveal').forEach(function (el) {
     observer.observe(el);
   });
-
 }
 
 
 /* ============================================================
    5. SCROLL-TO-TOP BUTTON
-   Appears after scrolling down 300px, clicking scrolls back to top
    ============================================================ */
 function initScrollTop() {
+  const btn = document.getElementById('scrollTop');
 
-  const scrollTopBtn = document.getElementById('scrollTop');
-
-  // Show/hide button based on scroll position
   window.addEventListener('scroll', function () {
-    if (window.scrollY > 300) {
-      scrollTopBtn.classList.add('visible');
-    } else {
-      scrollTopBtn.classList.remove('visible');
-    }
+    btn.classList.toggle('visible', window.scrollY > 300);
   });
 
-  // Scroll to top when button is clicked
-  scrollTopBtn.addEventListener('click', function () {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'   // Smooth scrolling
-    });
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-
 }
 
 
 /* ============================================================
-   6. CONTACT FORM SUBMISSION
-   Shows a success message when form is submitted
+   6. CONTACT FORM
    ============================================================ */
 function initContactForm() {
+  const form    = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  const submit  = form.querySelector('button[type="submit"]');
 
-  const form           = document.getElementById('contactForm');
-  const successMessage = document.getElementById('formSuccess');
-  const submitBtn      = form.querySelector('button[type="submit"]');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-  form.addEventListener('submit', function (event) {
-
-    // Prevent actual form submission (page reload)
-    event.preventDefault();
-
-    // --- Basic validation ---
     const name  = document.getElementById('name').value.trim();
     const phone = document.getElementById('phone').value.trim();
 
     if (!name || !phone) {
-      alert('Please fill in your name and phone number.');
+      alert('MISSING INPUT: Please fill in name and phone number.');
       return;
     }
 
-    // Validate phone: must be at least 10 digits
-    const phoneDigits = phone.replace(/\D/g, '');  // Remove non-digits
-    if (phoneDigits.length < 10) {
-      alert('Please enter a valid 10-digit phone number.');
+    if (phone.replace(/\D/g, '').length < 10) {
+      alert('INVALID INPUT: Please enter a valid 10-digit phone number.');
       return;
     }
 
-    // --- Show loading state on button ---
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Sending... ⏳';
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = '0.7';
+    // Loading state on button
+    const orig = submit.querySelector('span').textContent;
+    submit.querySelector('span').textContent = 'PROCESSING...';
+    submit.disabled = true;
 
-    // --- Simulate a 1.5 second API call delay ---
+    // Simulate 1.5s API call
     setTimeout(function () {
-
-      // Reset button
-      submitBtn.textContent = originalText;
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = '';
-
-      // Show success message
-      successMessage.style.display = 'block';
-
-      // Clear the form
+      submit.querySelector('span').textContent = orig;
+      submit.disabled = false;
+      success.style.display = 'block';
       form.reset();
 
-      // Hide success message after 5 seconds
-      setTimeout(function () {
-        successMessage.style.display = 'none';
-      }, 5000);
-
+      setTimeout(function () { success.style.display = 'none'; }, 5000);
     }, 1500);
-
   });
-
 }
 
 
 /* ============================================================
    7. ADD TO CART BUTTON FEEDBACK
-   Button briefly changes text to confirm the action
    ============================================================ */
 function initCartButtons() {
-
-  // Get all "Add to Cart" buttons
-  const cartBtns = document.querySelectorAll('.card-btn');
-
-  cartBtns.forEach(function (btn) {
+  document.querySelectorAll('.card-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
-
-      // Store original text
-      const originalText = btn.textContent;
-
-      // Change button to confirmation state
-      btn.textContent = '✓ Added!';
-      btn.style.background = '#4CAF8A';  // Green colour
+      const orig = btn.textContent;
+      btn.textContent = '✓ ADDED';
+      btn.style.background = 'var(--neon)';
+      btn.style.color = '#000';
       btn.disabled = true;
 
-      // Reset after 2 seconds
       setTimeout(function () {
-        btn.textContent = originalText;
+        btn.textContent = orig;
         btn.style.background = '';
+        btn.style.color = '';
         btn.disabled = false;
       }, 2000);
-
     });
   });
-
 }
 
 
 /* ============================================================
-   8. STATS COUNTER ANIMATION
-   Counts up numbers in the stats bar when they come into view
+   8. ANIMATED NUMBER COUNTERS
+   Counts up from 0 when stats bar scrolls into view
    ============================================================ */
-function initCounterAnimation() {
+function initCounters() {
+  const statNums = document.querySelectorAll('.stat-num[data-target]');
+  let triggered  = false;
 
-  const statNums = document.querySelectorAll('.stat-num');
-
-  // Extract the numeric value from text like "68+" or "10M+"
-  function parseValue(text) {
-    const num = parseFloat(text.replace(/[^0-9.]/g, ''));
-    return isNaN(num) ? 0 : num;
-  }
-
-  // Get the suffix (like "+", "M+", etc.)
-  function getSuffix(text) {
-    return text.replace(/[0-9.]/g, '');
-  }
-
-  // Animate a single number from 0 to target
-  function animateCounter(el, target, suffix, duration) {
-    let start     = 0;
-    const step    = target / (duration / 16);  // 60fps
-    let current   = 0;
-
-    const timer = setInterval(function () {
+  function animateNum(el, target, duration) {
+    let current  = 0;
+    const step   = target / (duration / 16);
+    const timer  = setInterval(function () {
       current += step;
-      if (current >= target) {
-        current = target;
-        clearInterval(timer);
-      }
-      // Display the number (round for clean look)
-      el.textContent = Math.round(current) + suffix;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.round(current);
     }, 16);
   }
 
-  // Use IntersectionObserver to trigger animation when stat bar is visible
   const observer = new IntersectionObserver(
-
     function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-
+        if (entry.isIntersecting && !triggered) {
+          triggered = true;
           statNums.forEach(function (el) {
-            const originalText = el.textContent;
-            const targetValue  = parseValue(originalText);
-            const suffix       = getSuffix(originalText);
-            animateCounter(el, targetValue, suffix, 1500);  // 1.5 second animation
+            animateNum(el, parseInt(el.getAttribute('data-target')), 1800);
           });
-
-          observer.unobserve(entry.target);  // Only animate once
+          observer.disconnect();
         }
       });
     },
-
-    { threshold: 0.5 }  // Trigger when 50% of stats bar is visible
-
+    { threshold: 0.5 }
   );
 
   const statsBar = document.querySelector('.stats-bar');
   if (statsBar) observer.observe(statsBar);
-
 }
 
 
 /* ============================================================
-   INIT — Run all functions when the page is fully loaded
+   9. TERMINAL TYPING EFFECT
+   Gradually reveals lines in the hero terminal card
+   ============================================================ */
+function initTerminalEffect() {
+  const terminal = document.querySelector('.hero-terminal');
+  if (!terminal) return;
+
+  const lines = terminal.querySelectorAll('.t-line');
+
+  // Hide all lines initially
+  lines.forEach(function (line) { line.style.opacity = '0'; });
+
+  // Reveal them one by one with a delay
+  lines.forEach(function (line, i) {
+    setTimeout(function () {
+      line.style.transition = 'opacity 0.3s ease';
+      line.style.opacity = '1';
+    }, i * 350 + 800); // Start after 0.8s, stagger by 350ms each
+  });
+}
+
+
+/* ============================================================
+   10. CARD HOVER SCAN LINE EFFECT
+   Adds a moving scan line effect on card hover (CSS handles
+   the animation, but we can reinitialize it per hover)
+   ============================================================ */
+function initCardEffects() {
+  document.querySelectorAll('.cake-card').forEach(function (card) {
+    card.addEventListener('mouseenter', function () {
+      const scanLine = card.querySelector('.card-scan-line');
+      if (scanLine) {
+        scanLine.style.animation = 'none';
+        scanLine.offsetHeight; // reflow
+        scanLine.style.animation = '';
+      }
+    });
+  });
+}
+
+
+/* ============================================================
+   INIT — Run all on page load
    ============================================================ */
 document.addEventListener('DOMContentLoaded', function () {
+  initNavbar();
+  initActiveLinks();
+  initMenuFilters();
+  initScrollReveal();
+  initScrollTop();
+  initContactForm();
+  initCartButtons();
+  initCounters();
+  initTerminalEffect();
+  initCardEffects();
 
-  initNavbar();             // Sticky navbar + hamburger
-  initActiveLinks();        // Highlight current nav link
-  initMenuFilters();        // Menu category tabs
-  initScrollReveal();       // Fade-in animations on scroll
-  initScrollTop();          // Scroll-to-top button
-  initContactForm();        // Form validation + submission
-  initCartButtons();        // Add to cart button feedback
-  initCounterAnimation();   // Animated number counters
-
-  console.log('🎂 Monginis website loaded successfully!');
-
+  console.log('[MONGINIS_OS v2.0] System boot complete ✓');
 });
