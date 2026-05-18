@@ -433,7 +433,7 @@ function openWhatsAppFromCart() {
   msg += `\n*Total:* ₹${total} (incl. ₹50 delivery)`;
 
   const encodedMsg = encodeURIComponent(msg);
-  window.open(`https://wa.me/919876543210?text=${encodedMsg}`, '_blank');
+  window.open(`https://wa.me/916203753384?text=${encodedMsg}`, '_blank');
 }
 
 /* ============================================================
