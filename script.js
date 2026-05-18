@@ -380,7 +380,7 @@ function sendWhatsAppOrder(name, phone, address) {
   msg += `\n\n_Payment: WhatsApp Order_`;
 
   const encodedMsg     = encodeURIComponent(msg);
-  const whatsappNumber = '919876543210';  // ← Replace with your number (91 = India code)
+  const whatsappNumber = '916203753384';  // ← Replace with your number (91 = India code)
   const waURL          = `https://wa.me/${whatsappNumber}?text=${encodedMsg}`;
 
   window.open(waURL, '_blank');
